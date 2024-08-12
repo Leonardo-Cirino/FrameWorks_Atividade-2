@@ -1,0 +1,19 @@
+-  Foram implementadas os CRUDs nas paginas principais do projeto.
+
+-  Parte do projeto está sendo alterado com o tempo, por exemplo, não estou cadastrando novos produtos e sim novos anúncios dos produtos para não gerar ambiguidade e redundância desnecessária.
+
+-  O inicio da página inicial permanece o mesmo porém agora está trazendo todos os anúncios cadastrados na pagina de cadastro de anúncios
+
+-  Os anúncios na pagina inicial estão organizados em linhas, logo abaixo há o campo de pergunta, onde cada pergunta enviada fica destacada no próprio anuncio do produto
+
+-  A exclusão dos anúncios acontecem na pagina de cadastro e não na pagina inicial
+
+-  Os cadastros de Usuários seguem conforme desenhado no MER, ou seja, consiste em cadastrar o nome do usuário, o e-mail e o CPF como chave primária. Ao cadastrar o usuário a lista logo abaixo é atualizada podendo editar o campo de nome e e-mail ou então deletar o cadastro.
+
+-  Nos cadastros dos anúncios é solicitado o titulo, a categoria, a descrição, o ID, o preço unitário e a quantidade. Os anúncios cadastros ficam visíveis na pagina de cadastro como na pagina inicial, porém somente na pagina de cadastros é possível editar ou excluir
+
+-  Pagina de relatórios ainda não está melhor desenvolvido, na trilha 3 vi que temos que escolher algumas paginas para bloquear por login, desta forma irei desenvolver melhor essas paginas na trilha 3, pensando em permitir a geração do relatório após login
+
+-  A pagina de anuncio favoritos pede um ID e a confirmação no botão, após isto o anuncio do ID selecionado ficara com o texto "Favoritado" na pagina inicial.
+
+-  categoria de anúncios ainda é um esboço, mas acredito que não irá para frente já que a categoria é definida no momento de criar o anuncio. Durante o desenvolvimento idealizei colocar a categoria na pagina inicial onde na lista dos anúncios cadastrados ele trará somente os anúncios da categoria correspondente. Por ser um código mais complexo preciso pesquisar mais de como desenvolve-lo.

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Cadastros</title>
+</head>
+<body>
+    <header>
+    <div class="container-fluid head">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" accesskey="p" href={{url_for('index')}}>Página Inicial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('cad_usuarios')}}>Cadastros de Usuários</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('cad_anuncios')}}>Cadastros de Anuncios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('relat_compra')}}>Relatórios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Anuncios Favoritos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('anuncios_categ')}}>Categoria de Anuncios</a>
+              </li>
+        </ul>	
+    </div>
+    </header>
+    <H1>{{titulofav}}</H1>
+    <form id="cad_fav" action="{{url_for('favoritar_anuncio') }}" method="POST">
+        <p><label for="titlefav">Digite o ID do Anuncio que deseja favoritar</label></p>
+        <p><Input type="text" id="id_anu" name="titlefav"></p>
+
+        <p><Input type="submit" value="Favoritar"></p>
+    </form>
+
+    <script>
+    	document.getElementById("cad_fav").addEventListener("submit", function(evento) {
+        	var titlefav = document.getElementById("titlefav").value.trim();
+
+	        if (titlefav === '') {
+    	        alert("Para favoritar um anuncio, o titulo é obrigatório");
+        	    evento.preventDefault();}
+
+            else {alert("Anuncio Favoritado!")
+        }
+    });
+	</script>
+
+</body>
+</html>
