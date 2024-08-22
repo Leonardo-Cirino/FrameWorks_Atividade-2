@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Relatórios</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+        /* Fundo com Degradê em Azul Claro */
+        body {
+            background: linear-gradient(to bottom right, #e0f7fa, #b3e5fc);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        /* Estilo para o cabeçalho */
+        .head {
+            background-color: #0288d1; /* Azul mais escuro para contraste */
+            color: white;
+        }
+
+        .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #b3e5fc;
+        }
+
+        /* Estilo para o formulário de relatórios */
+        form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #0277bd;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #01579b;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #0288d1;
+            border-radius: 5px;
+            margin-bottom: 12px;
+        }
+
+        input[type="submit"] {
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0277bd;
+        }
+
+        /* Estilo para o seletor de tipo de relatório */
+        select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #0288d1;
+            border-radius: 5px;
+        }
+
+        #tipo_selecionado {
+            background-color: #f1f8ff;
+            border: 1px solid #0288d1;
+        }
+
+        /* Estilo para links */
+        a {
+            color: #0288d1;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" accesskey="p" href="{{ url_for('index') }}">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_usuarios') }}">Cadastros de Usuários</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('listar_usuarios') }}">Lista Usuários</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_anuncios') }}">Cadastros de Anuncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_fav') }}">Anuncios Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_categ') }}">Categoria de Anuncios</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Emissão de Relatórios</h1>
+        <form id="emitir">
+            <p><label for="idprod">ID do Produto</label></p>
+            <p><input type="text" id="idprod" name="idprod"></p>
+
+            <p><label for="nomeprod">Nome do Produto</label></p>
+            <p><input type="text" id="nomeprod" name="nomeprod"></p>
+
+            <p><label for="dt_compra">Data Corte</label></p>
+            <p><input type="text" id="dt_compra" name="dt_compra"></p>
+
+            <p>Escolha o tipo de relatório para emissão</p>
+            <select name="tipo" id="tipo">
+                <option value="Compra">Compra</option>
+                <option value="Venda">Venda</option>
+            </select>
+            <input type="text" id="tipo_selecionado" placeholder="Tipo Selecionado" readonly/>
+
+            <p><input type="submit" value="Gerar"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('tipo').addEventListener('change', function() {
+            var selectedValue = this.value;
+            document.getElementById('tipo_selecionado').value = selectedValue;
+        });
+
+        document.getElementById('tipo').dispatchEvent(new Event('change'));
+    </script>
+
+    <script>
+        document.getElementById("emitir").addEventListener("submit", function(evento) {
+            var tipo = document.getElementById("tipo_selecionado").value.trim();
+
+            if (tipo === '') {
+                alert("O tipo de relatório precisa ser declarado!");
+                evento.preventDefault();
+            } else {
+                alert("Relatório gerado!");
+            }
+        });
+    </script>
+</body>
+</html>

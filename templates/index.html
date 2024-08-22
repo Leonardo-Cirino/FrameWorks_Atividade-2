@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Cadastros</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+.nav-link {
+  color: white;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #b3e5fc;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" accesskey="p" href="#">Página Inicial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('cad_usuarios')}}>Cadastros de Usuários</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('listar_usuarios') }}">Lista Usuários</a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('cad_anuncios')}}>Cadastros de Anuncios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('relat_compra')}}>Relatórios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('anuncios_fav')}}>Anuncios Favoritos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{url_for('anuncios_categ')}}>Categoria de Anuncios</a>
+              </li>
+        </ul>
+    </div>
+    </header>
+    <div class="container-fluid">
+      <h1>Bem Vindo ao FastShop</h1>
+      <h2>ACHOU  COMPROU  CHEGOU</h2>
+      <img src={{ url_for('static', filename='images/tenis_exp.jpg')}} alt="Tenis expostos">
+    </div>
+    <div class="container-fluid">
+      <h2>Anúncios</h2>
+      {% for anuncio in anuncios %}
+      <div class="anuncio">
+        <table class="table table-responsive table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Marca/Modelo</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quantidade</th>
+              <th scope='col'>Favorito</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ anuncio.titulo }}</th>
+              <td>{{ anuncio.categoria }}</td>
+              <td>{{ anuncio.descricao }}</td>
+              <td>R$ {{ anuncio.preco }}</td>
+              <td>{{ anuncio.quantidade }}</td>
+              <td>{{ anuncio.favorito  }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Perguntas:</h3>
+        <div>
+            {% if anuncio.perguntas %}
+                {% for pergunta in anuncio.perguntas.split('\n') %}
+                    <p><strong>Pergunta:</strong> {{ pergunta }}</p>
+                {% endfor %}
+            {% else %}
+                <p>Não há perguntas para este anúncio ainda.</p>
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <form class="row g-3" action="{{ url_for('enviar_pergunta', id=anuncio.id_anu) }}" method="POST">
+                <div class="col-md-12">
+                    <label class="form-label" for="pergunta">Faça uma pergunta sobre este anúncio:</label>
+                    <input class="form-control" type="text" id="pergunta" name="pergunta" required>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit" value="Enviar Pergunta">Enviar</button>
+                </div>
+            </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</body>
+</html>

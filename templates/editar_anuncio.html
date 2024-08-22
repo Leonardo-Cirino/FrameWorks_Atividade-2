@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Anuncio</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body>
+    <h1>Editar Anuncio</h1>
+    <form action="{{ url_for('editar_anu', id=anuncio.id_anu) }}" method="POST">
+        <p><label for="title">Titulo do Anuncio</label></p>
+        <p><input type="text" id="title" name="title" value="{{ anuncio.titulo }}"></p>
+        <p><label for="categ">Categoria do Produto</label></p>
+        <p><input type="text" id="categ" name="categ" value="{{ anuncio.categoria }}"></p>
+        <p><label for="Desc">Descrição do Anuncio</label></p>
+        <p><input type="text" id="Desc" name="Desc" value="{{ anuncio.descricao }}"></p>
+        <p><label for="price">Preço Unitário</label></p>
+        <p><input type="number" id="price" name="price" step="0.01" value="{{ anuncio.preco }}"></p>
+        <p><label for="Qtd">Quantidade</label></p>
+        <p><input type="number" id="Qtd" name="Qtd" value="{{ anuncio.quantidade }}"></p>
+        <p><input type="submit" value="Atualizar"></p>
+    </form>
+    
+    <a href="{{ url_for('cad_anuncios') }}">Voltar para a lista de anúncios</a>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Cadastros</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+        .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #b3e5fc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" accesskey="p" href="{{ url_for('index') }}">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Cadastros de Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('listar_usuarios') }}">Lista Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_anuncios') }}">Cadastros de Anuncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('relat_compra') }}">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_fav') }}">Anuncios Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_categ') }}">Categoria de Anuncios</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>{{ titulocaduser }}</h1>
+        <form action="{{ url_for('cad_user') }}" method="post">
+            <p><label for="user">Nome do Usuário</label></p>
+            <p><input type="text" id="user" name="user" required></p>
+
+            <p><label for="email">E-mail</label></p>
+            <p><input type="text" id="email" name="email" required></p>
+
+            <p><label for="CPF">CPF</label></p>
+            <p><input type="text" id="CPF" name="CPF" required></p>
+
+            <p><label for="passwd">Senha</label></p>
+            <p><input type="password" id="passwd" name="passwd" required></p> 
+
+            <p><input type="submit" value="Cadastrar"></p>
+        </form>
+    </div>
+</body>
+</html>

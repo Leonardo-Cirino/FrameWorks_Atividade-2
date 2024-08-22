@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Cadastros</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+        .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #b3e5fc;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #0288d1;
+            border-radius: 5px;
+            margin-bottom: 12px;
+        }
+
+        input[type="submit"] {
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0277bd;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" accesskey="p" href="{{ url_for('index') }}">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_usuarios') }}">Cadastros de Usuários</a>
+                <li class="nav-item">
+                     <a class="nav-link" href="{{ url_for('listar_usuarios') }}">Lista Usuários</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Cadastros de Anuncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('relat_compra') }}">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_fav') }}">Anuncios Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_categ') }}">Categoria de Anuncios</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>{{ titulocadanuncio }}</h1>
+        <form action="{{ url_for('cad_anu') }}" method="POST">
+            <p><label for="title">Título do Anúncio</label></p>
+            <p><input type="text" id="title" name="title"></p>
+
+            <p><label for="categ">Categoria do Produto</label></p>
+            <p><input type="text" id="categ" name="categ"></p>
+
+            <p><label for="Desc">Descrição do Anúncio</label></p>
+            <p><input type="text" id="Desc" name="Desc"></p>
+
+            <p><label for="ID">Identificador do Produto</label></p>
+            <p><input type="text" id="ID" name="ID"></p>
+
+            <p><label for="price">Preço Unitário</label></p>
+            <p><input type="number" id="price" name="price" step="0.01"></p>
+
+            <p><label for="Qtd">Quantidade</label></p>
+            <p><input type="number" id="Qtd" name="Qtd"></p>
+
+            <p><input type="submit" value="Cadastrar"></p>
+        </form>
+
+        <h2>Anúncios ativos na <a href="{{ url_for('index') }}" class="link-underline">Página Inicial</a></h2>
+        <div class="table-container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for anuncio in anuncios %}
+                        <tr>
+                            <td>{{ anuncio.titulo }}</td>
+                            <td>{{ anuncio.id_anu  }}</td>
+                            <td>{{ anuncio.categoria }}</td>
+                            <td>{{ anuncio.descricao }}</td>
+                            <td>R$ {{ anuncio.preco }}</td>
+                            <td>{{ anuncio.quantidade }}</td>
+                            <td>
+                                <a href="{{ url_for('editar_anu', id=anuncio.id_anu) }}">Editar</a>
+                                <a href="{{ url_for('deletar_anuncio', id=anuncio.id_anu) }}" onclick="return confirm('Tem certeza que deseja deletar este anúncio?')">Excluir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Favoritar Anúncio</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <style>
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #b3e5fc;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #0288d1;
+            border-radius: 5px;
+            margin-bottom: 12px;
+        }
+
+        input[type="submit"] {
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0277bd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" accesskey="p" href="{{ url_for('index') }}">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_usuarios') }}">Cadastros de Usuários</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('listar_usuarios') }}">Lista Usuários</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_anuncios') }}">Cadastros de Anuncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('relat_compra') }}">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Anúncios Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_categ') }}">Categoria de Anuncios</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <h1>{{ titulofav }}</h1>
+    <form id="cad_fav" action="{{ url_for('favoritar_anuncio') }}" method="POST">
+        <p><label for="titlefav">Digite o ID do Anúncio que deseja favoritar</label></p>
+        <p><input type="text" id="titlefav" name="titlefav"></p>
+
+        <p><input type="submit" value="Favoritar"></p>
+    </form>
+
+    <script>
+        document.getElementById("cad_fav").addEventListener("submit", function(evento) {
+            var titlefav = document.getElementById("titlefav").value.trim();
+
+            if (titlefav === '') {
+                alert("Para favoritar um anúncio, o ID é obrigatório.");
+                evento.preventDefault();
+            } else {
+                alert("Anúncio Favoritado!");
+            }
+        });
+    </script>
+</body>
+</html>

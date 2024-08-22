@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastShop - Lista de Usuários</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<style>
+    .nav-link {
+  color: white;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #b3e5fc;
+}
+</style>
+<body>
+    <header>
+        <div class="container-fluid head responsive border-bottom">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{url_for('cad_usuarios')}}">Cadastros de Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Lista Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cad_anuncios') }}">Cadastros de Anúncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('relat_compra') }}">Relatórios de Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('anuncios_fav') }}">Anúncios Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Lista de Usuários Cadastrados</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                        <tr>
+                            <td>{{ usuario.nome }}</td>
+                            <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.CPF }}</td>
+                            <td>
+                                <a href="{{ url_for('editar_usuario', cpf=usuario.CPF) }}">Editar</a>
+                                <a href="{{ url_for('deletar_usuario', cpf=usuario.CPF) }}" onclick="return confirm('Tem certeza que deseja deletar este usuário?');">Excluir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('cad_usuarios') }}" class="btn btn-primary">Cadastrar Novo Usuário</a>
+        </div>
+    </main>
+</body>
+</html>
